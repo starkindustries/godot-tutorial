@@ -10,6 +10,8 @@ const MAX_SPEED = 100
 const FRICTION = 500
 var velocity = Vector2.ZERO
 onready var animation_player = $AnimationPlayer
+onready var animationTree = $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,10 +33,12 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized()	
 	
 	if input_vector != Vector2.ZERO:
-		animation_player.play("RunRight")
+		animationTree.set("parameters/Idle/blend_position", input_vector)
+		animationTree.set("parameters/Run/blend_position", input_vector)
+		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
-		animation_player.play("IdleRight")
+		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		
 	velocity = move_and_slide(velocity)
