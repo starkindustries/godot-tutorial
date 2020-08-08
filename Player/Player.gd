@@ -9,11 +9,12 @@ const ACCELERATION = 500
 const MAX_SPEED = 100
 const FRICTION = 500
 var velocity = Vector2.ZERO
+onready var animation_player = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Hello world")
-
+	pass
+		
 func _physics_process(delta):
 	# TODO: Fix jitter and stutter:
 	# https://docs.godotengine.org/uk/latest/tutorials/misc/jitter_stutter.html
@@ -30,8 +31,10 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized()	
 	
 	if input_vector != Vector2.ZERO:
+		animation_player.play("RunRight")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
+		animation_player.play("IdleRight")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		
 	velocity = move_and_slide(velocity)
