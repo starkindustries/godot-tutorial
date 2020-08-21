@@ -25,6 +25,8 @@ onready var hurtbox = $HurtBox
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# picks a new seed for the randomizer
+	randomize()
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
