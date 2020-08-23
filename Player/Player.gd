@@ -9,6 +9,7 @@ const ACCELERATION = 500
 const MAX_SPEED = 100
 const ROLL_SPEED = 150
 const FRICTION = 500
+const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 
 enum { MOVE, ROLL, ATTACK }
 
@@ -22,6 +23,7 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitBoxPivot/SwordHitBox
 onready var hurtbox = $HurtBox
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,9 +38,9 @@ func _physics_process(delta):
 		MOVE:
 			move_state(delta)
 		ROLL:
-			roll_state(delta)
+			roll_state()
 		ATTACK:
-			attack_state(delta)
+			attack_state()
 	
 func move_state(delta):	
 	# TODO: Fix jitter and stutter:
@@ -76,7 +78,7 @@ func move_state(delta):
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
 
-func roll_state(delta):
+func roll_state():
 	velocity = roll_vector * ROLL_SPEED
 	animationState.travel("Roll")
 	move()
@@ -84,7 +86,7 @@ func roll_state(delta):
 func move():
 	velocity = move_and_slide(velocity)
 
-func attack_state(delta):
+func attack_state():
 	velocity = Vector2.ZERO
 	animationState.travel("Attack")
 	
@@ -96,6 +98,15 @@ func attack_animation_finished():
 	state = MOVE
 
 func _on_HurtBox_area_entered(area):
-	stats.health -= 1
-	hurtbox.start_invincibility(.5)
+	stats.health -= area.damage
+	hurtbox.start_invincibility(.6)
 	hurtbox.create_hit_effect()
+	var playerHurtSound = PlayerHurtSound.instance()
+	get_tree().current_scene.add_child(playerHurtSound)
+
+
+func _on_HurtBox_invincibility_started():
+	blinkAnimationPlayer.play("Start")
+
+func _on_HurtBox_invincibility_ended():
+	blinkAnimationPlayer.play("Stop")
