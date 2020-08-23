@@ -6,6 +6,7 @@ signal invincibility_started
 signal invincibility_ended
 
 onready var timer = $Timer
+onready var collisionShape = $CollisionShape2D
 
 func start_invincibility(duration):
 	emit_signal("invincibility_started")
@@ -20,9 +21,10 @@ func create_hit_effect():
 func _on_Timer_timeout():
 	emit_signal("invincibility_ended")
 
+func _on_HurtBox_invincibility_started():
+	collisionShape.set_deferred("disabled", true)
 
 func _on_HurtBox_invincibility_ended():
-	set_deferred("monitorable", false)
+	collisionShape.set_deferred("disabled", false)
 
-func _on_HurtBox_invincibility_started():
-	set_deferred("monitorable", true)
+
