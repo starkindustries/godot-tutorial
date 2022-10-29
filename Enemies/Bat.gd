@@ -3,9 +3,9 @@ extends KinematicBody2D
 const FRICTION = 200
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 
-export var ACCELERATION = 300
-export var MAX_SPEED = 50
-export var FRUCTION = 200
+@export var ACCELERATION = 300
+@export var MAX_SPEED = 50
+@export var FRUCTION = 200
 
 enum {
 	IDLE,
@@ -17,13 +17,13 @@ var state = IDLE
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
-onready var sprite = $AnimatedSprite
-onready var stats = $Stats
-onready var playerDetectionZone = $PlayerDetectionZone
-onready var hurtbox = $HurtBox
-onready var softCollision = $SoftCollision
-onready var wanderController = $WanderController
-onready var animationPlayer = $AnimationPlayer
+@onready var sprite = $AnimatedSprite
+@onready var stats = $Stats
+@onready var playerDetectionZone = $PlayerDetectionZone
+@onready var hurtbox = $HurtBox
+@onready var softCollision = $SoftCollision
+@onready var wanderController = $WanderController
+@onready var animationPlayer = $AnimationPlayer
 
 func _ready():
 	print(stats.health)

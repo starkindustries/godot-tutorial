@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
 # Declare member variables here. Examples:
@@ -14,22 +14,21 @@ const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 enum { MOVE, ROLL, ATTACK }
 
 var state = MOVE
-var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var stats = PlayerStats
 
 # onready var animationPlayer = $AnimationPlayer
-onready var animationTree = $AnimationTree
-onready var animationState = animationTree.get("parameters/playback")
-onready var swordHitbox = $HitBoxPivot/SwordHitBox
-onready var hurtbox = $HurtBox
-onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+@onready var animationTree = $AnimationTree
+@onready var animationState = animationTree.get("parameters/playback")
+@onready var swordHitbox = $HitBoxPivot/SwordHitBox
+@onready var hurtbox = $HurtBox
+@onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# picks a new seed for the randomizer
 	randomize()
-	stats.connect("no_health", self, "queue_free")
+	stats.no_health.connect(queue_free)
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 
@@ -84,7 +83,7 @@ func roll_state():
 	move()
 
 func move():
-	velocity = move_and_slide(velocity)
+	move_and_slide()
 
 func attack_state():
 	velocity = Vector2.ZERO

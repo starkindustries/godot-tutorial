@@ -1,7 +1,7 @@
 extends Camera2D
 
-onready var topLeft = $Limits/TopLeft
-onready var bottomRight = $Limits/BottomRight
+@onready var topLeft = $Limits/TopLeft
+@onready var bottomRight = $Limits/BottomRight
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

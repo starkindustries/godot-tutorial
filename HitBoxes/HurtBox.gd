@@ -5,8 +5,8 @@ const HitEffect = preload("res://Effects/HitEffect.tscn")
 signal invincibility_started
 signal invincibility_ended
 
-onready var timer = $Timer
-onready var collisionShape = $CollisionShape2D
+@onready var timer = $Timer
+@onready var collisionShape = $CollisionShape2D
 
 func start_invincibility(duration):
 	emit_signal("invincibility_started")
