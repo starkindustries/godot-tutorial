@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://djq0ci1p4abru"]
 
-[ext_resource type="PackedScene" path="res://World/Bush.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bdvjitmn5bk8v" path="res://World/Bush.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cvvav8ktpyh8f" path="res://World/GrassBackground.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://b1qq71pjs6u5d" path="res://World/DirtTileset.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://q2d2520adqx7" path="res://World/CliffTileset.png" id="5"]
-[ext_resource type="PackedScene" path="res://World/Grass.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://odrr78at4evh" path="res://World/Grass.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://d0cxtbgbqytck" path="res://UI/HealthUI.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://World/Tree.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bwsc2j20bnifb" path="res://World/Tree.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://c02gkmf17lav0" path="res://Player/Player.tscn" id="9_j6s00"]
 [ext_resource type="PackedScene" path="res://Camera2D.tscn" id="10"]
 
