@@ -97,6 +97,7 @@ func attack_animation_finished():
 	state = MOVE
 
 func _on_HurtBox_area_entered(area):
+	print("TEST _on_HurtBox_area_entered")
 	stats.health -= area.damage
 	hurtbox.start_invincibility(.6)
 	hurtbox.create_hit_effect()
@@ -109,3 +110,16 @@ func _on_HurtBox_invincibility_started():
 
 func _on_HurtBox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
+
+
+func _on_hurt_box_2_area_entered(area):
+	print("TEST _on_hurt_box_2_area_entered")
+#	stats.health -= area.damage
+#	hurtbox.start_invincibility(.6)
+#	hurtbox.create_hit_effect()
+#	var playerHurtSound = PlayerHurtSound.instance()
+#	get_tree().current_scene.add_child(playerHurtSound)
+
+
+func _on_hurt_box_3_area_entered(area):
+	print("TEST _on_hurt_box_3_area_entered")

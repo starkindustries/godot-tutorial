@@ -1,14 +1,16 @@
-[gd_scene load_steps=62 format=3 uid="uid://c02gkmf17lav0"]
+[gd_scene load_steps=65 format=3 uid="uid://c02gkmf17lav0"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dnsi2mdtnkxuk" path="res://Player/Player.png" id="2"]
-[ext_resource type="PackedScene" path="res://HitBoxes/HitBox.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://c300vv1lhylex" path="res://HitBoxes/HitBox.tscn" id="3"]
 [ext_resource type="Script" path="res://Player/SwordHitBox.gd" id="4"]
-[ext_resource type="PackedScene" path="res://HitBoxes/HurtBox.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://ca62r1f2qhpqb" path="res://HitBoxes/HurtBox.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://d15b4ynss6437" path="res://Shadows/MediumShadow.png" id="6"]
 [ext_resource type="AudioStream" uid="uid://6ctchcy8qmx1" path="res://Music and Sounds/Swipe.wav" id="7"]
 [ext_resource type="AudioStream" uid="uid://i7op2hjipbty" path="res://Music and Sounds/Evade.wav" id="8"]
 [ext_resource type="Shader" path="res://WhiteColor.gdshader" id="9"]
+[ext_resource type="PackedScene" uid="uid://cppgfj756qldr" path="res://HitBoxes/HurtBox2.tscn" id="10_if653"]
+[ext_resource type="PackedScene" uid="uid://b6hqr83edsapo" path="res://hurt_box_3.tscn" id="11_6csuh"]
 
 [sub_resource type="ShaderMaterial" id="48"]
 shader = ExtResource("9")
@@ -16,7 +18,7 @@ shader_parameter/active = false
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 2.0
-height = 4.0
+height = 10.0
 
 [sub_resource type="Animation" id="2"]
 resource_name = "AttackDown"
@@ -740,8 +742,8 @@ graph_offset = Vector2(63.5586, 23.1073)
 radius = 16.0
 
 [sub_resource type="CapsuleShape2D" id="47"]
-radius = 2.0
-height = 4.0
+radius = 5.0
+height = 12.0
 
 [sub_resource type="Animation" id="49"]
 resource_name = "Start"
@@ -781,6 +783,9 @@ _data = {
 "Stop": SubResource("50")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_eftb7"]
+radius = 20.025
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1")
@@ -797,7 +802,6 @@ hframes = 60
 frame = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource("1")
 
@@ -843,9 +847,19 @@ libraries = {
 "": SubResource("AnimationLibrary_eyhws")
 }
 
+[node name="HurtBox2" parent="." instance=ExtResource("10_if653")]
+
+[node name="CollisionShape2D" parent="HurtBox2" index="0"]
+shape = SubResource("CircleShape2D_eftb7")
+
+[node name="HurtBox3" parent="." instance=ExtResource("11_6csuh")]
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
 [connection signal="invincibility_started" from="HurtBox" to="." method="_on_HurtBox_invincibility_started"]
+[connection signal="area_entered" from="HurtBox2" to="." method="_on_hurt_box_2_area_entered"]
+[connection signal="area_entered" from="HurtBox3" to="." method="_on_hurt_box_3_area_entered"]
 
 [editable path="HitBoxPivot/SwordHitBox"]
 [editable path="HurtBox"]
+[editable path="HurtBox2"]

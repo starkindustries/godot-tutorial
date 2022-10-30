@@ -1,15 +1,16 @@
-[gd_scene load_steps=26 format=3 uid="uid://bgnqa34558c1b"]
+[gd_scene load_steps=28 format=3 uid="uid://bgnqa34558c1b"]
 
 [ext_resource type="Texture2D" uid="uid://xlr5prxojd63" path="res://Enemies/Bat.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://7lo7dpqe5sdm" path="res://Shadows/SmallShadow.png" id="2"]
-[ext_resource type="PackedScene" path="res://HitBoxes/HurtBox.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://ca62r1f2qhpqb" path="res://HitBoxes/HurtBox.tscn" id="3"]
 [ext_resource type="Script" path="res://Enemies/Bat.gd" id="4"]
 [ext_resource type="PackedScene" path="res://Enemies/Stats.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://Enemies/PlayerDetectionZone.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://HitBoxes/HitBox.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://y6et1tx1mjg3" path="res://Enemies/PlayerDetectionZone.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://c300vv1lhylex" path="res://HitBoxes/HitBox.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://HitBoxes/SoftCollision.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://Enemies/WanderController.tscn" id="9"]
 [ext_resource type="Shader" path="res://WhiteColor.gdshader" id="10"]
+[ext_resource type="PackedScene" uid="uid://cppgfj756qldr" path="res://HitBoxes/HurtBox2.tscn" id="11_oglj2"]
 
 [sub_resource type="ShaderMaterial" id="14"]
 resource_local_to_scene = true
@@ -48,8 +49,8 @@ animations = [{
 radius = 4.0
 
 [sub_resource type="CapsuleShape2D" id="8"]
-radius = 3.0
-height = 6.0
+radius = 7.0
+height = 18.0
 
 [sub_resource type="CircleShape2D" id="9"]
 radius = 70.0071
@@ -98,6 +99,8 @@ _data = {
 "Stop": SubResource("13")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0i7r"]
+
 [node name="Bat" type="CharacterBody2D"]
 collision_layer = 16
 script = ExtResource("4")
@@ -113,11 +116,9 @@ offset = Vector2(0, -12)
 texture = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("7")
 
 [node name="HurtBox" parent="." instance=ExtResource("3")]
-visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
@@ -153,6 +154,11 @@ libraries = {
 "": SubResource("AnimationLibrary_7t8nl")
 }
 
+[node name="HurtBox2" parent="." instance=ExtResource("11_oglj2")]
+
+[node name="CollisionShape2D" parent="HurtBox2" index="0"]
+shape = SubResource("CircleShape2D_h0i7r")
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
 [connection signal="invincibility_started" from="HurtBox" to="." method="_on_HurtBox_invincibility_started"]
@@ -162,3 +168,4 @@ libraries = {
 [editable path="PlayerDetectionZone"]
 [editable path="HitBox"]
 [editable path="SoftCollision"]
+[editable path="HurtBox2"]
