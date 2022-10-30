@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djq0ci1p4abru"]
+[gd_scene load_steps=15 format=3 uid="uid://djq0ci1p4abru"]
 
 [ext_resource type="PackedScene" uid="uid://bdvjitmn5bk8v" path="res://World/Bush.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cvvav8ktpyh8f" path="res://World/GrassBackground.png" id="3"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://odrr78at4evh" path="res://World/Grass.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://d0cxtbgbqytck" path="res://UI/HealthUI.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://bwsc2j20bnifb" path="res://World/Tree.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bgnqa34558c1b" path="res://Enemies/Bat.tscn" id="9_21ifd"]
 [ext_resource type="PackedScene" uid="uid://c02gkmf17lav0" path="res://Player/Player.tscn" id="9_j6s00"]
 [ext_resource type="PackedScene" path="res://Camera2D.tscn" id="10"]
 
@@ -130,6 +131,12 @@ position = Vector2(48, 120)
 
 [node name="YSortPlayerRemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
+
+[node name="Bat" parent="YSort" instance=ExtResource("9_21ifd")]
+position = Vector2(200, 100)
+
+[node name="Bat2" parent="YSort" instance=ExtResource("9_21ifd")]
+position = Vector2(100, 200)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

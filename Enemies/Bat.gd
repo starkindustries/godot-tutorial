@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 const FRICTION = 200
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
@@ -14,7 +14,6 @@ enum {
 }
 
 var state = IDLE
-var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
 @onready var sprite = $AnimatedSprite
@@ -26,11 +25,12 @@ var knockback = Vector2.ZERO
 @onready var animationPlayer = $AnimationPlayer
 
 func _ready():
+	velocity = Vector2.ZERO
 	print(stats.health)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
-	knockback = move_and_slide(knockback)
+	#TODO: knockback = move_and_slide(knockback)
 
 	match state:
 		IDLE:
@@ -53,11 +53,11 @@ func _physics_process(delta):
 				state = IDLE
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
-	velocity = move_and_slide(velocity)
+	move_and_slide()
 
 func update_wander():
 	state = pick_random_state([IDLE, WANDER])
-	wanderController.start_wander_timer(rand_range(1, 3))
+	wanderController.start_wander_timer(randi_range(1, 3))
 
 func accelerate_towards_point(point, delta):
 	var direction = global_position.direction_to(point)
