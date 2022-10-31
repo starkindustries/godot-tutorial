@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://7lo7dpqe5sdm" path="res://Shadows/SmallShadow.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://ca62r1f2qhpqb" path="res://HitBoxes/HurtBox.tscn" id="3"]
 [ext_resource type="Script" path="res://Enemies/Bat.gd" id="4"]
-[ext_resource type="PackedScene" path="res://Enemies/Stats.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://d0vrc28ctpv35" path="res://Enemies/Stats.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://y6et1tx1mjg3" path="res://Enemies/PlayerDetectionZone.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c300vv1lhylex" path="res://HitBoxes/HitBox.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://HitBoxes/SoftCollision.tscn" id="8"]
