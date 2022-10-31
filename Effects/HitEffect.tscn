@@ -1,31 +1,32 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://b8beeiuma7sik"]
 
-[ext_resource path="res://Effects/Effect.gd" type="Script" id=1]
-[ext_resource path="res://Effects/HitEffect.png" type="Texture" id=2]
-[ext_resource path="res://Music and Sounds/Hit.wav" type="AudioStream" id=3]
+[ext_resource type="Script" path="res://Effects/Effect.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bc85bga4icrf5" path="res://Effects/HitEffect.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://3qhbj8m1iw20" path="res://Music and Sounds/Hit.wav" id="3"]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="1"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 24, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="2"]
+atlas = ExtResource("2")
+region = Rect2(24, 0, 24, 24)
 
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+[sub_resource type="SpriteFrames" id="3"]
+animations = [{
+"frames": [SubResource("1"), SubResource("2")],
 "loop": true,
-"name": "Animate",
+"name": &"Animate",
 "speed": 10.0
-} ]
+}]
 
-[node name="HitEffect" type="AnimatedSprite"]
-frames = SubResource( 3 )
-animation = "Animate"
-offset = Vector2( 0, -8 )
-script = ExtResource( 1 )
+[node name="HitEffect" type="AnimatedSprite2D"]
+frames = SubResource("3")
+animation = &"Animate"
+offset = Vector2(0, -8)
+script = ExtResource("1")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource("3")
+volume_db = -12.235
 autoplay = true

@@ -97,7 +97,10 @@ func attack_animation_finished():
 	state = MOVE
 
 func _on_HurtBox_area_entered(area):
-	print("PLAYER _on_HurtBox_area_entered")
+	print("PLAYER ORIGINAL _on_HurtBox_area_entered: ", area.name)
+	if "damage" not in area:
+		print("PLAYER _on_HurtBox_area_entered 'damage not in area': ", area.name)
+		return
 	stats.health -= area.damage
 	hurtbox.start_invincibility(.6)
 	hurtbox.create_hit_effect()
