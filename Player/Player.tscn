@@ -820,6 +820,7 @@ rotation = 4.71239
 
 [node name="SwordHitBox" parent="HitBoxPivot" instance=ExtResource("3")]
 position = Vector2(11, -1)
+collision_layer = 8
 collision_mask = 8
 script = ExtResource("4")
 
@@ -827,11 +828,11 @@ script = ExtResource("4")
 shape = SubResource("46")
 disabled = true
 
-[node name="HurtBox" parent="." instance=ExtResource("5")]
+[node name="PlayerHurtBox" parent="." instance=ExtResource("5")]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
+[node name="CollisionShape2D" parent="PlayerHurtBox" index="0"]
 position = Vector2(0, -5)
 shape = SubResource("47")
 
@@ -843,9 +844,9 @@ libraries = {
 "": SubResource("AnimationLibrary_eyhws")
 }
 
-[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
-[connection signal="invincibility_started" from="HurtBox" to="." method="_on_HurtBox_invincibility_started"]
+[connection signal="area_entered" from="PlayerHurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="invincibility_ended" from="PlayerHurtBox" to="." method="_on_HurtBox_invincibility_ended"]
+[connection signal="invincibility_started" from="PlayerHurtBox" to="." method="_on_HurtBox_invincibility_started"]
 
 [editable path="HitBoxPivot/SwordHitBox"]
-[editable path="HurtBox"]
+[editable path="PlayerHurtBox"]

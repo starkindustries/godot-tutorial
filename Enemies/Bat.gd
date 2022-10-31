@@ -19,7 +19,7 @@ var knockback = Vector2.ZERO
 @onready var sprite = $AnimatedSprite
 @onready var stats = $Stats
 @onready var playerDetectionZone = $PlayerDetectionZone
-@onready var hurtbox = $HurtBox
+@onready var hurtbox = $BatHurtBox
 @onready var softCollision = $SoftCollision
 @onready var wanderController = $WanderController
 @onready var animationPlayer = $AnimationPlayer
@@ -72,8 +72,10 @@ func pick_random_state(state_list):
 	state_list.shuffle()
 	return state_list.pop_front()
 
-func _on_HurtBox_area_entered(area):
-	print("BAT _on_HurtBox_area_entered: ", area.name)
+func _on_HurtBox_area_entered(area):	
+	if "damage" not in area:
+		print("BAT _on_HurtBox_area_entered. 'Damage' does not exist: ", area.name)
+		return
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
 	hurtbox.create_hit_effect()
@@ -91,8 +93,3 @@ func _on_HurtBox_invincibility_started():
 
 func _on_HurtBox_invincibility_ended():
 	animationPlayer.play("Stop")
-
-
-func _on_hurt_box_2_area_entered(area):
-	print("BAT _on_hurt_box_2_area_entered: ", area.name)
-

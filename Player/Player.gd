@@ -21,7 +21,7 @@ var stats = PlayerStats
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree.get("parameters/playback")
 @onready var swordHitbox = $HitBoxPivot/SwordHitBox
-@onready var hurtbox = $HurtBox
+@onready var hurtbox = $PlayerHurtBox
 @onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
@@ -97,7 +97,6 @@ func attack_animation_finished():
 	state = MOVE
 
 func _on_HurtBox_area_entered(area):
-	print("PLAYER ORIGINAL _on_HurtBox_area_entered: ", area.name)
 	if "damage" not in area:
 		print("PLAYER _on_HurtBox_area_entered 'damage not in area': ", area.name)
 		return
@@ -115,19 +114,3 @@ func _on_HurtBox_invincibility_started():
 func _on_HurtBox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
 
-
-func _on_hurt_box_2_area_entered(area):
-	print("PLAYER _on_hurt_box_2_area_entered: ", area.name)
-	if "damage" not in area:
-		print("PLAYER _on_hurt_box_2_area_entered, part 2.1")
-		return
-	print("PLAYER _on_hurt_box_2_area_entered, part 2.2")
-	stats.health -= area.damage
-	hurtbox.start_invincibility(.6)
-	hurtbox.create_hit_effect()
-	var playerHurtSound = PlayerHurtSound.instantiate()
-	get_tree().current_scene.add_child(playerHurtSound)
-
-
-func _on_hurt_box_3_area_entered(area):
-	print("PLAYER _on_hurt_box_3_area_entered: ", area.name)
