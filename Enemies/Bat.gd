@@ -73,6 +73,7 @@ func pick_random_state(state_list):
 	return state_list.pop_front()
 
 func _on_HurtBox_area_entered(area):
+	print("BAT _on_HurtBox_area_entered: ", area.name)
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
 	hurtbox.create_hit_effect()
@@ -80,7 +81,7 @@ func _on_HurtBox_area_entered(area):
 
 func _on_Stats_no_health():
 	queue_free()
-	var enemyDeathEffect = EnemyDeathEffect.instance()
+	var enemyDeathEffect = EnemyDeathEffect.instantiate()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
 
@@ -90,3 +91,8 @@ func _on_HurtBox_invincibility_started():
 
 func _on_HurtBox_invincibility_ended():
 	animationPlayer.play("Stop")
+
+
+func _on_hurt_box_2_area_entered(area):
+	print("BAT _on_hurt_box_2_area_entered: ", area.name)
+

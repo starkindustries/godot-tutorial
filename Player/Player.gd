@@ -97,15 +97,16 @@ func attack_animation_finished():
 	state = MOVE
 
 func _on_HurtBox_area_entered(area):
-	print("TEST _on_HurtBox_area_entered")
+	print("PLAYER _on_HurtBox_area_entered")
 	stats.health -= area.damage
 	hurtbox.start_invincibility(.6)
 	hurtbox.create_hit_effect()
-	var playerHurtSound = PlayerHurtSound.instance()
+	var playerHurtSound = PlayerHurtSound.instantiate()
 	get_tree().current_scene.add_child(playerHurtSound)
 
 
 func _on_HurtBox_invincibility_started():
+	print("PLAYER _on_HurtBox_invincibility_started")
 	blinkAnimationPlayer.play("Start")
 
 func _on_HurtBox_invincibility_ended():
@@ -113,13 +114,17 @@ func _on_HurtBox_invincibility_ended():
 
 
 func _on_hurt_box_2_area_entered(area):
-	print("TEST _on_hurt_box_2_area_entered")
-#	stats.health -= area.damage
-#	hurtbox.start_invincibility(.6)
-#	hurtbox.create_hit_effect()
-#	var playerHurtSound = PlayerHurtSound.instance()
-#	get_tree().current_scene.add_child(playerHurtSound)
+	print("PLAYER _on_hurt_box_2_area_entered: ", area.name)
+	if "damage" not in area:
+		print("PLAYER _on_hurt_box_2_area_entered, part 2.1")
+		return
+	print("PLAYER _on_hurt_box_2_area_entered, part 2.2")
+	stats.health -= area.damage
+	hurtbox.start_invincibility(.6)
+	hurtbox.create_hit_effect()
+	var playerHurtSound = PlayerHurtSound.instantiate()
+	get_tree().current_scene.add_child(playerHurtSound)
 
 
 func _on_hurt_box_3_area_entered(area):
-	print("TEST _on_hurt_box_3_area_entered")
+	print("PLAYER _on_hurt_box_3_area_entered: ", area.name)

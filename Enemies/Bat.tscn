@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bgnqa34558c1b"]
+[gd_scene load_steps=29 format=3 uid="uid://bgnqa34558c1b"]
 
 [ext_resource type="Texture2D" uid="uid://xlr5prxojd63" path="res://Enemies/Bat.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://7lo7dpqe5sdm" path="res://Shadows/SmallShadow.png" id="2"]
@@ -56,7 +56,7 @@ height = 18.0
 radius = 70.0071
 
 [sub_resource type="CircleShape2D" id="10"]
-radius = 4.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="11"]
 radius = 7.0
@@ -100,6 +100,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h0i7r"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y01yh"]
+radius = 16.0
 
 [node name="Bat" type="CharacterBody2D"]
 collision_layer = 16
@@ -119,6 +123,7 @@ texture = ExtResource("2")
 shape = SubResource("7")
 
 [node name="HurtBox" parent="." instance=ExtResource("3")]
+visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
@@ -134,11 +139,11 @@ max_health = 2
 modulate = Color(1, 1, 1, 0.215686)
 shape = SubResource("9")
 
-[node name="HitBox" parent="." instance=ExtResource("7")]
-visible = false
+[node name="HitBox_TEST_HIT_BOX_ORIGINAL" parent="." instance=ExtResource("7")]
+collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" parent="HitBox" index="0"]
+[node name="CollisionShape2D" parent="HitBox_TEST_HIT_BOX_ORIGINAL" index="0"]
 position = Vector2(1, -15)
 shape = SubResource("10")
 
@@ -155,17 +160,29 @@ libraries = {
 }
 
 [node name="HurtBox2" parent="." instance=ExtResource("11_oglj2")]
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" parent="HurtBox2" index="0"]
+position = Vector2(0, -14)
 shape = SubResource("CircleShape2D_h0i7r")
+
+[node name="TESTER_HIT_BOX_RENAME" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TESTER_HIT_BOX_RENAME"]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_y01yh")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
 [connection signal="invincibility_started" from="HurtBox" to="." method="_on_HurtBox_invincibility_started"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="HurtBox2" to="." method="_on_hurt_box_2_area_entered"]
 
 [editable path="HurtBox"]
 [editable path="PlayerDetectionZone"]
-[editable path="HitBox"]
+[editable path="HitBox_TEST_HIT_BOX_ORIGINAL"]
 [editable path="SoftCollision"]
 [editable path="HurtBox2"]

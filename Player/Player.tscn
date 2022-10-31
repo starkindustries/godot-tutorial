@@ -848,16 +848,22 @@ libraries = {
 }
 
 [node name="HurtBox2" parent="." instance=ExtResource("10_if653")]
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" parent="HurtBox2" index="0"]
 shape = SubResource("CircleShape2D_eftb7")
 
 [node name="HurtBox3" parent="." instance=ExtResource("11_6csuh")]
+collision_layer = 0
+collision_mask = 4
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
 [connection signal="invincibility_started" from="HurtBox" to="." method="_on_HurtBox_invincibility_started"]
 [connection signal="area_entered" from="HurtBox2" to="." method="_on_hurt_box_2_area_entered"]
+[connection signal="invincibility_ended" from="HurtBox2" to="." method="_on_HurtBox_invincibility_ended"]
+[connection signal="invincibility_started" from="HurtBox2" to="." method="_on_HurtBox_invincibility_started"]
 [connection signal="area_entered" from="HurtBox3" to="." method="_on_hurt_box_3_area_entered"]
 
 [editable path="HitBoxPivot/SwordHitBox"]

@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func create_grass_effect():
-	var grassEffect = GrassEffect.instance()
+	var grassEffect = GrassEffect.instantiate()
 	get_parent().add_child(grassEffect)
 	grassEffect.global_position = global_position
 
